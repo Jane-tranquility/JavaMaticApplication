@@ -3,12 +3,12 @@ import java.math.BigDecimal;
 import java.util.Map;
 import ingredient.Ingredient;
 
-public abstract class Drink implements Comparable<Drink>{
+public class Drink implements Comparable<Drink>{
 	private final String name;
 	private final Map<Ingredient, Integer> ingredientMap;
 	private BigDecimal cost=new BigDecimal("0.00");
 	
-	Drink(String name, Map<Ingredient, Integer> ingredientMap){
+	public Drink(String name, Map<Ingredient, Integer> ingredientMap){
 		this.name=name;
 		this.ingredientMap=ingredientMap;
 		initializeCost();

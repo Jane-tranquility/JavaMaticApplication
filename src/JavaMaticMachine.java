@@ -1,43 +1,27 @@
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.List;
-import java.util.ArrayList;
 
-import drink.*;
-import ingredient.*;
+import drink.Drink;
+import ingredient.Ingredient;
 
 
 
 public class JavaMaticMachine {
-	private static int INGREDIENT_CAPACITY=10;
-	private List<Drink> drinkList=new ArrayList<Drink>();
+	private final static int INGREDIENT_CAPACITY=10;
+	private final List<Drink> drinkList=Default.getDefaultDrinks();
 	private Map<Ingredient, Integer> ingredientStock=new TreeMap<Ingredient, Integer>();
 	
 	public JavaMaticMachine() {
-		initializeDrinkList();
-		initializeIngredients();
+		restockIngredients();
 	}
 	
-	private void initializeDrinkList() {
-		drinkList.add(new CaffeAmericano());
-		drinkList.add(new CaffeLatte());
-		drinkList.add(new CaffeMocha());
-		drinkList.add(new Cappuccino());
-		drinkList.add(new CoffeeDrink());
-		drinkList.add(new DecafCoffeeDrink());
+	private void restockIngredients(){
+		for (Ingredient in: Default.getDefaultIngredients()) {
+			ingredientStock.put(in, INGREDIENT_CAPACITY);
+		}
 	}
 	
-	private void initializeIngredients() {
-		ingredientStock.put(new Coffee(),INGREDIENT_CAPACITY);
-		ingredientStock.put(new Cocoa(),INGREDIENT_CAPACITY);
-		ingredientStock.put(new Cream(),INGREDIENT_CAPACITY);
-		ingredientStock.put(new DecafCoffee(),INGREDIENT_CAPACITY);
-		ingredientStock.put(new Espresso(),INGREDIENT_CAPACITY);
-		ingredientStock.put(new FoamedMilk(),INGREDIENT_CAPACITY);
-		ingredientStock.put(new SteamedMilk(),INGREDIENT_CAPACITY);
-		ingredientStock.put(new Sugar(),INGREDIENT_CAPACITY);
-		ingredientStock.put(new WhippedCream(),INGREDIENT_CAPACITY);
-	}
 	public void start() {
 		displayInventory();
 		displayMenu();

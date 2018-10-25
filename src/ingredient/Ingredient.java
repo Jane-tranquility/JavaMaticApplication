@@ -1,11 +1,11 @@
 package ingredient;
 import java.math.BigDecimal;
 
-public abstract class Ingredient implements Comparable<Ingredient>{
+public class Ingredient implements Comparable<Ingredient>{
 	private final String name;
 	private final BigDecimal unitCost;
 
-	Ingredient(String name, BigDecimal unitCost){
+	public Ingredient(String name, BigDecimal unitCost){
 		this.name=name;
 		this.unitCost=unitCost;
 	}
