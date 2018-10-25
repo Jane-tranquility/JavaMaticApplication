@@ -32,21 +32,9 @@ public abstract class Drink implements Comparable<Drink>{
 	}
 	
 	public Map<Ingredient, Integer> getIngredients(){
-		return this.getIngredients();
+		return this.ingredientMap;
 	}
 	
-	public int getIngredientCount(Ingredient ingredient) {
-		if (ingredient==null) {
-			throw new NullPointerException("A null ingredient does not have ingredient count");
-		}
-		
-		for (Map.Entry<Ingredient, Integer> entry: this.ingredientMap.entrySet()) {
-			if (entry.getKey().equals(ingredient)) {
-				return entry.getValue();
-			}
-		}
-		return 0;
-	}
 
 	@Override
 	public int compareTo(Drink other) {

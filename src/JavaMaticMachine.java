@@ -1,5 +1,7 @@
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.List;
+import java.util.ArrayList;
 
 import drink.*;
 import ingredient.*;
@@ -8,7 +10,7 @@ import ingredient.*;
 
 public class JavaMaticMachine {
 	private static int INGREDIENT_CAPACITY=10;
-	private Map<Drink, Boolean> drinkList=new TreeMap<Drink, Boolean>();
+	private List<Drink> drinkList=new ArrayList<Drink>();
 	private Map<Ingredient, Integer> ingredientStock=new TreeMap<Ingredient, Integer>();
 	
 	public JavaMaticMachine() {
@@ -17,12 +19,12 @@ public class JavaMaticMachine {
 	}
 	
 	private void initializeDrinkList() {
-		drinkList.put(new CaffeAmericano(), true);
-		drinkList.put(new CaffeLatte(), true);
-		drinkList.put(new CaffeMocha(), true);
-		drinkList.put(new Cappuccino(), true);
-		drinkList.put(new CoffeeDrink(), true);
-		drinkList.put(new DecafCoffeeDrink(), true);
+		drinkList.add(new CaffeAmericano());
+		drinkList.add(new CaffeLatte());
+		drinkList.add(new CaffeMocha());
+		drinkList.add(new Cappuccino());
+		drinkList.add(new CoffeeDrink());
+		drinkList.add(new DecafCoffeeDrink());
 	}
 	
 	private void initializeIngredients() {
@@ -50,10 +52,22 @@ public class JavaMaticMachine {
 	
 	private void displayMenu() {
 		System.out.println("Menu:");
-		int count=1;
-		for (Map.Entry<Drink, Boolean> entry:drinkList.entrySet()) {
-			System.out.println("\t"+count+","+entry.getKey()+","+entry.getValue());
-			count++;
+		for (int i=0;i<drinkList.size();i++) {
+			System.out.println("\t"+(i+1)+","+drinkList.get(i)+","+isDrinkOutOfStock(drinkList.get(i)));
 		}
+	}
+	
+	private boolean isDrinkOutOfStock(Drink drink) {
+		if (drink==null) {
+			throw new NullPointerException("Drink object is null");
+		}
+		for (Map.Entry<Ingredient, Integer> entry: drink.getIngredients().entrySet()) {
+			Ingredient in=entry.getKey();
+			int stock=ingredientStock.get(in);
+			if(stock<entry.getValue()) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
