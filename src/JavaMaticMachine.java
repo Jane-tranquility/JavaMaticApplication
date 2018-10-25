@@ -23,7 +23,7 @@ public class JavaMaticMachine {
 		}
 	}
 	
-	public void start() {
+	public void display() {
 		displayInventory();
 		displayMenu();
 	}
@@ -38,14 +38,30 @@ public class JavaMaticMachine {
 	private void displayMenu() {
 		System.out.println("Menu:");
 		for (int i=0;i<drinkList.size();i++) {
-			System.out.println((i+1)+","+drinkList.get(i)+","+isDrinkOutOfStock(drinkList.get(i)));
+			System.out.println((i+1)+","+drinkList.get(i)+","+!isDrinkOutOfStock(drinkList.get(i)));
 		}
 	}
 	
 	public void reStock() {
 		restockIngredients();
-		displayInventory();
-		displayMenu();
+	}
+	
+	public void makeDrink(int index) {
+		Drink drink=drinkList.get(index-1);
+		if (isDrinkOutOfStock(drink)) {
+			System.out.println("Out of stock:"+drink.getName());
+		}else {
+			System.out.println("Dispensing:"+drink.getName());
+			updateStock(drink);
+		}
+	}
+	
+	private void updateStock(Drink drink) {
+		for (Map.Entry<Ingredient, Integer> recipe: drink.getIngredients().entrySet()) {
+			Ingredient in=recipe.getKey();
+			int stock=ingredientStock.get(in);
+			ingredientStock.put(in, stock-recipe.getValue());
+		}
 	}
 	
 	private boolean isDrinkOutOfStock(Drink drink) {
@@ -56,10 +72,10 @@ public class JavaMaticMachine {
 			Ingredient in=entry.getKey();
 			int stock=ingredientStock.get(in);
 			if(stock<entry.getValue()) {
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 	
 	public int getMenuSize() {
