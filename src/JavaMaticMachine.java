@@ -61,4 +61,8 @@ public class JavaMaticMachine {
 		}
 		return true;
 	}
+	
+	public int getMenuSize() {
+		return drinkList.size();
+	}
 }
