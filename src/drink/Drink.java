@@ -5,7 +5,7 @@ import ingredient.Ingredient;
 
 public abstract class Drink implements Comparable<Drink>{
 	private final String name;
-	private Map<Ingredient, Integer> ingredientMap;
+	private final Map<Ingredient, Integer> ingredientMap;
 	private BigDecimal cost=new BigDecimal("0.00");
 	
 	Drink(String name, Map<Ingredient, Integer> ingredientMap){
@@ -18,7 +18,7 @@ public abstract class Drink implements Comparable<Drink>{
 	private void initializeCost() {
 		for (Map.Entry<Ingredient, Integer> entry: this.ingredientMap.entrySet()) {
 			for (int i=0;i<entry.getValue();i++) {
-				this.cost.add(entry.getKey().getUnitCost());
+				this.cost=this.cost.add(entry.getKey().getUnitCost());
 			}
 		}
 	}
@@ -83,7 +83,7 @@ public abstract class Drink implements Comparable<Drink>{
 
 	@Override
 	public String toString() {
-		return name + "," + cost;
+		return name + ",$" + cost;
 	}
 	
 	

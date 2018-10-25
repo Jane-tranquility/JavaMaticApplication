@@ -9,7 +9,7 @@ import ingredient.WhippedCream;
 
 public class CaffeMocha extends Drink{
 	@SuppressWarnings("serial")
-	CaffeMocha(){
+	public CaffeMocha(){
 		super("Caffe Mocha", new TreeMap<Ingredient, Integer>(){
 		{
 			put(new Espresso(),1);

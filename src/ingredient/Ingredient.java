@@ -5,7 +5,7 @@ public abstract class Ingredient implements Comparable<Ingredient>{
 	private final String name;
 	private final BigDecimal unitCost;
 
-	public Ingredient(String name, BigDecimal unitCost){
+	Ingredient(String name, BigDecimal unitCost){
 		this.name=name;
 		this.unitCost=unitCost;
 	}

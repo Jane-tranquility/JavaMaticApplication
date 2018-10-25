@@ -8,7 +8,7 @@ import ingredient.Sugar;
 
 public class DecafCoffeeDrink extends Drink{
 	@SuppressWarnings("serial")
-	DecafCoffeeDrink(){
+	public DecafCoffeeDrink(){
 		super("Decaf Coffee", new TreeMap<Ingredient, Integer>(){
 		{
 			put(new DecafCoffee(),3);

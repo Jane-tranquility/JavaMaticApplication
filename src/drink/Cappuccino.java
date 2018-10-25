@@ -8,7 +8,7 @@ import ingredient.FoamedMilk;
 
 public class Cappuccino extends Drink{
 	@SuppressWarnings("serial")
-	Cappuccino(){
+	public Cappuccino(){
 		super("Cappuccino", new TreeMap<Ingredient, Integer>(){
 		{
 			put(new Espresso(),2);

@@ -7,7 +7,7 @@ import ingredient.Ingredient;
 
 public class CaffeLatte extends Drink{
 	@SuppressWarnings("serial")
-	CaffeLatte(){
+	public CaffeLatte(){
 		super("Caffe Latte", new TreeMap<Ingredient, Integer>(){
 		{
 			put(new Espresso(),2);
