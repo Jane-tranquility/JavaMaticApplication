@@ -59,7 +59,6 @@ public final class Default {
 		}
 		return null;
 		
-		
 	}
 	
 	private static final List<Drink> defaultDrinks=new ArrayList<Drink>();

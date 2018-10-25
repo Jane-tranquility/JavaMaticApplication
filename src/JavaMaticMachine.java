@@ -31,15 +31,21 @@ public class JavaMaticMachine {
 	private void displayInventory() {
 		System.out.println("Inventory:");
 		for (Map.Entry<Ingredient, Integer> entry:ingredientStock.entrySet()) {
-			System.out.println("\t"+entry.getKey()+","+entry.getValue());
+			System.out.println(entry.getKey()+","+entry.getValue());
 		}
 	}
 	
 	private void displayMenu() {
 		System.out.println("Menu:");
 		for (int i=0;i<drinkList.size();i++) {
-			System.out.println("\t"+(i+1)+","+drinkList.get(i)+","+isDrinkOutOfStock(drinkList.get(i)));
+			System.out.println((i+1)+","+drinkList.get(i)+","+isDrinkOutOfStock(drinkList.get(i)));
 		}
+	}
+	
+	public void reStock() {
+		restockIngredients();
+		displayInventory();
+		displayMenu();
 	}
 	
 	private boolean isDrinkOutOfStock(Drink drink) {
