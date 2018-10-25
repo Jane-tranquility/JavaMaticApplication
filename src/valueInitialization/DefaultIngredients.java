@@ -1,16 +1,13 @@
 package valueInitialization;
-import java.util.List;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.TreeMap;
+import java.util.List;
 
-import drink.Drink;
-import ingredient.Ingredient;
 import exceptions.NoMatchItemFoundException;
+import ingredient.Ingredient;
 
-@SuppressWarnings("serial")
-public final class Default {
-	
+public final class DefaultIngredients {
 	private static final List<Ingredient> defaultIngredients=new ArrayList<Ingredient>();
 	static {
 		defaultIngredients.add(new Ingredient("Cocoa", new BigDecimal("0.90")));
@@ -59,45 +56,5 @@ public final class Default {
 		}
 		return null;
 		
-	}
-	
-	private static final List<Drink> defaultDrinks=new ArrayList<Drink>();
-	static{
-		try {
-			defaultDrinks.add(new Drink("Caffe Americano", new TreeMap<Ingredient, Integer>() {{
-				put(searchIngredientByName("Espresso"),3);
-			}}));
-			defaultDrinks.add(new Drink("Caffe Latte", new TreeMap<Ingredient, Integer>() {{
-				put(searchIngredientByName("Espresso"),2);
-				put(searchIngredientByName("Steamed Milk"),1);
-			}}));
-			defaultDrinks.add(new Drink("Caffe Mocha", new TreeMap<Ingredient, Integer>() {{
-				put(searchIngredientByName("Espresso"),1);
-				put(searchIngredientByName("Cocoa"),1);
-				put(searchIngredientByName("Steamed Milk"),1);
-				put(searchIngredientByName("Whipped Cream"),1);
-			}}));
-			defaultDrinks.add(new Drink("Cappuccino", new TreeMap<Ingredient, Integer>() {{
-				put(searchIngredientByName("Espresso"),2);
-				put(searchIngredientByName("Steamed Milk"),1);
-				put(searchIngredientByName("Foamed Milk"),1);
-			}}));
-			defaultDrinks.add(new Drink("Coffee", new TreeMap<Ingredient, Integer>() {{
-				put(searchIngredientByName("Coffee"),3);
-				put(searchIngredientByName("Sugar"),1);
-				put(searchIngredientByName("Cream"),1);
-			}}));
-			defaultDrinks.add(new Drink("Decaf Coffee", new TreeMap<Ingredient, Integer>() {{
-				put(searchIngredientByName("Decaf Coffee"),3);
-				put(searchIngredientByName("Sugar"),1);
-				put(searchIngredientByName("Cream"),1);
-			}}));
-		}catch(NoMatchItemFoundException e) {
-			System.out.print("default drink list failed, because of ingredient name not searchable");
-		}
-		
-	};
-	public static List<Drink> getDefaultDrinks() {
-		return defaultDrinks;
 	}
 }

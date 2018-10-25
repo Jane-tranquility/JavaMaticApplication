@@ -1,4 +1,7 @@
+package main;
 import java.util.Scanner;
+
+import javaMaticMachine.JavaMaticMachine;
 
 public class JavaMaticApplication {
 
@@ -11,7 +14,10 @@ public class JavaMaticApplication {
 		while(!input.equals("q") && !input.equals("Q")){
 			
 			try {
-				if (input.equals("r") || input.equals("R")){
+				if(input.isEmpty()) {
+					input=s.nextLine();
+					continue;
+				}else if (input.equals("r") || input.equals("R")){
 					machine.reStock();
 				}else if (Integer.parseInt(input)>0 && Integer.parseInt(input)<=length) {
 					machine.makeDrink(Integer.parseInt(input));

@@ -1,16 +1,18 @@
+package javaMaticMachine;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.List;
 
 import drink.Drink;
 import ingredient.Ingredient;
-import valueInitialization.Default;
+import valueInitialization.DefaultDrinks;
+import valueInitialization.DefaultIngredients;
 
 
 
 public class JavaMaticMachine {
 	private final static int INGREDIENT_CAPACITY=10;
-	private final List<Drink> drinkList=Default.getDefaultDrinks();
+	private final List<Drink> drinkList=DefaultDrinks.getDefaultDrinks();
 	private Map<Ingredient, Integer> ingredientStock=new TreeMap<Ingredient, Integer>();
 	
 	public JavaMaticMachine() {
@@ -18,9 +20,13 @@ public class JavaMaticMachine {
 	}
 	
 	private void restockIngredients(){
-		for (Ingredient in: Default.getDefaultIngredients()) {
+		for (Ingredient in: DefaultIngredients.getDefaultIngredients()) {
 			ingredientStock.put(in, INGREDIENT_CAPACITY);
 		}
+	}
+	
+	public void reStock() {
+		restockIngredients();
 	}
 	
 	public void display() {
@@ -40,10 +46,6 @@ public class JavaMaticMachine {
 		for (int i=0;i<drinkList.size();i++) {
 			System.out.println((i+1)+","+drinkList.get(i)+","+!isDrinkOutOfStock(drinkList.get(i)));
 		}
-	}
-	
-	public void reStock() {
-		restockIngredients();
 	}
 	
 	public void makeDrink(int index) {
