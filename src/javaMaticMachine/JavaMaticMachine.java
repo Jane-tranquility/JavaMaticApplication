@@ -1,11 +1,12 @@
 package javaMaticMachine;
-import java.util.Map;
+import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.List;
+import java.util.Map;
 
-import drink.Drink;
+import ingredient.Drink;
 import ingredient.Ingredient;
-import recipes.RecipeItem;
+import ingredient.IngredientListItem;
 import valueInitialization.DefaultDrinks;
 import valueInitialization.DefaultIngredients;
 
@@ -13,41 +14,36 @@ import valueInitialization.DefaultIngredients;
 public class JavaMaticMachine {
 	private final static int INGREDIENT_CAPACITY=10;
 	private final List<Drink> drinkList=DefaultDrinks.getDefaultDrinks();
-	private Map<Ingredient, Integer> ingredientStock=new TreeMap<Ingredient, Integer>();
+	private final List<Ingredient> ingredientList=DefaultIngredients.getDefaultIngredients();
+	private SortedMap<Ingredient, Integer> ingredientStock=new TreeMap<Ingredient, Integer>();
 	
 	public JavaMaticMachine() {
 		restockIngredients();
 	}
 	
 	private void restockIngredients(){
-		for (Ingredient in: DefaultIngredients.getDefaultIngredients()) {
+		for (Ingredient in: ingredientList) {
 			ingredientStock.put(in, INGREDIENT_CAPACITY);
 		}
 	}
 	
+	public SortedMap<Ingredient, Integer> getStock(){
+		return this.ingredientStock;
+	}
+	
+	public List<Drink> getDrinkMenu(){
+		return this.drinkList;
+	}
+	
+	
 	public void reStock() {
-		restockIngredients();
-	}
-	
-	public void display() {
-		displayInventory();
-		System.out.println();
-		displayMenu();
-		System.out.println();
-	}
-	
-	private void displayInventory() {
-		System.out.println("Inventory:");
-		for (Map.Entry<Ingredient, Integer> entry:ingredientStock.entrySet()) {
-			System.out.println(entry.getKey()+","+entry.getValue());
+		for (Map.Entry<Ingredient, Integer> entry: ingredientStock.entrySet()) {
+			ingredientStock.put(entry.getKey(), INGREDIENT_CAPACITY);
 		}
 	}
 	
-	private void displayMenu() {
-		System.out.println("Menu:");
-		for (int i=0;i<drinkList.size();i++) {
-			System.out.println((i+1)+","+drinkList.get(i)+","+!isDrinkOutOfStock(drinkList.get(i)));
-		}
+	private int getMenuSize() {
+		return drinkList.size();
 	}
 	
 	public void makeDrink(int index) {
@@ -69,18 +65,18 @@ public class JavaMaticMachine {
 		if (drink==null) {
 			throw new NullPointerException("Drink object is null");
 		}
-		for (RecipeItem recipe: drink.getRecipe().getRecipeItemList()) {
+		for (IngredientListItem recipe: drink.getRecipe()) {
 			Ingredient in=recipe.getIngredient();
 			int stock=ingredientStock.get(in);
 			ingredientStock.put(in, stock-recipe.getUnits());
 		}
 	}
 	
-	private boolean isDrinkOutOfStock(Drink drink) {
+	public boolean isDrinkOutOfStock(Drink drink) {
 		if (drink==null) {
 			throw new NullPointerException("Drink object is null");
 		}
-		for (RecipeItem recipe: drink.getRecipe().getRecipeItemList()) {
+		for (IngredientListItem recipe: drink.getRecipe()) {
 			Ingredient in=recipe.getIngredient();
 			int stock=ingredientStock.get(in);
 			if(stock<recipe.getUnits()) {
@@ -90,7 +86,4 @@ public class JavaMaticMachine {
 		return false;
 	}
 	
-	private int getMenuSize() {
-		return drinkList.size();
-	}
 }

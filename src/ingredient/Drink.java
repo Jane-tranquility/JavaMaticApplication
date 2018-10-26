@@ -1,13 +1,13 @@
-package drink;
+package ingredient;
 import java.math.BigDecimal;
-import recipes.Recipe;
-import recipes.RecipeItem;
+import java.util.List;
+
 
 public class Drink implements Comparable<Drink>{
 	private final String name;
-	private final Recipe recipe;
+	private final List<IngredientListItem> recipe;
 	private BigDecimal cost;
-	public Drink(String name, Recipe recipe){
+	public Drink(String name, List<IngredientListItem> recipe){
 		if (name==null) {
 			throw new IllegalArgumentException("name can not be null during Drink construction.");
 		}
@@ -22,7 +22,7 @@ public class Drink implements Comparable<Drink>{
 	
 	private void initializeCost() {
 		this.cost=new BigDecimal("0.00");
-		for (RecipeItem entry: this.recipe.getRecipeItemList()) {
+		for (IngredientListItem entry: this.recipe) {
 			for (int i=0;i<entry.getUnits();i++) {
 				this.cost=this.cost.add(entry.getIngredient().getUnitCost());
 			}
@@ -37,7 +37,7 @@ public class Drink implements Comparable<Drink>{
 		return this.cost;
 	}
 	
-	public Recipe getRecipe() {
+	public List<IngredientListItem> getRecipe() {
 		return this.recipe;
 	}
 	

@@ -1,12 +1,10 @@
-package recipes;
+package ingredient;
 
-import ingredient.Ingredient;
-
-public class RecipeItem {
+public class IngredientListItem {
 	private final Ingredient ingredient;
 	private int units;
 	
-	public RecipeItem(Ingredient ingredient, int units) {
+	public IngredientListItem(Ingredient ingredient, int units) {
 		if (ingredient==null) {
 			throw new IllegalArgumentException("ingredient can not be null during RecipeItem construction.");
 		}
