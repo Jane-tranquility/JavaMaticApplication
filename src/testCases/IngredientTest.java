@@ -29,13 +29,13 @@ class IngredientTest {
 	@Test 
 	void testGetName() {
 		Ingredient ingredient=new Ingredient("Coffee", new BigDecimal("0.90"));
-		Assertions.assertEquals(ingredient.getName(),"Coffee");
+		Assertions.assertEquals("Coffee", ingredient.getName());
 	}
 	
 	@Test 
 	void testGetUnitCost() {
 		Ingredient ingredient=new Ingredient("Coffee", new BigDecimal("0.90"));
-		Assertions.assertEquals(ingredient.getUnitCost(),new BigDecimal("0.90"));
+		Assertions.assertEquals(new BigDecimal("0.90"), ingredient.getUnitCost());
 	}
 	
 	@Test 
@@ -60,8 +60,8 @@ class IngredientTest {
 		Ingredient ingredient3=new Ingredient("Decaf Coffee",new BigDecimal("0.80"));
         int compare12=ingredient1.compareTo(ingredient2);
         int compare23=ingredient2.compareTo(ingredient3);
-        Assertions.assertSame(compare12,0);
-        Assertions.assertSame(compare23,-1);
+        Assertions.assertSame(0, compare12);
+        Assertions.assertTrue(compare23<0);
 	}
 	
 	@Test 
@@ -80,7 +80,7 @@ class IngredientTest {
 	@Test 
 	void testToString() {
 		Ingredient ingredient=new Ingredient("Coffee", new BigDecimal("0.90"));
-		Assertions.assertEquals(ingredient.toString(),"Coffee");
+		Assertions.assertEquals("Coffee", ingredient.toString());
 	}
 
 }

@@ -44,7 +44,7 @@ class IngredientListItemTest {
 		Ingredient ingredient=new Ingredient("Coffee", new BigDecimal("0.90"));
 		IngredientListItem ingredientListItem=new IngredientListItem(ingredient, 2);
 		Ingredient in=ingredientListItem.getIngredient();
-		Assertions.assertEquals(in,ingredient);
+		Assertions.assertEquals(ingredient, in);
 	}
 	
 	@Test
@@ -52,7 +52,7 @@ class IngredientListItemTest {
 		Ingredient ingredient=new Ingredient("Coffee", new BigDecimal("0.90"));
 		IngredientListItem ingredientListItem=new IngredientListItem(ingredient, 2);
 		int unit=ingredientListItem.getUnits();
-		Assertions.assertSame(unit,2);
+		Assertions.assertSame(2, unit);
 	}
 
 }
