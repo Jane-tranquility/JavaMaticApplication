@@ -5,6 +5,7 @@ import java.util.List;
 
 import drink.Drink;
 import ingredient.Ingredient;
+import recipes.RecipeItem;
 import valueInitialization.DefaultDrinks;
 import valueInitialization.DefaultIngredients;
 
@@ -30,7 +31,9 @@ public class JavaMaticMachine {
 	
 	public void display() {
 		displayInventory();
+		System.out.println();
 		displayMenu();
+		System.out.println();
 	}
 	
 	private void displayInventory() {
@@ -66,10 +69,10 @@ public class JavaMaticMachine {
 		if (drink==null) {
 			throw new NullPointerException("Drink object is null");
 		}
-		for (Map.Entry<Ingredient, Integer> recipe: drink.getIngredients().entrySet()) {
-			Ingredient in=recipe.getKey();
+		for (RecipeItem recipe: drink.getRecipe().getRecipeItemList()) {
+			Ingredient in=recipe.getIngredient();
 			int stock=ingredientStock.get(in);
-			ingredientStock.put(in, stock-recipe.getValue());
+			ingredientStock.put(in, stock-recipe.getUnits());
 		}
 	}
 	
@@ -77,10 +80,10 @@ public class JavaMaticMachine {
 		if (drink==null) {
 			throw new NullPointerException("Drink object is null");
 		}
-		for (Map.Entry<Ingredient, Integer> entry: drink.getIngredients().entrySet()) {
-			Ingredient in=entry.getKey();
+		for (RecipeItem recipe: drink.getRecipe().getRecipeItemList()) {
+			Ingredient in=recipe.getIngredient();
 			int stock=ingredientStock.get(in);
-			if(stock<entry.getValue()) {
+			if(stock<recipe.getUnits()) {
 				return true;
 			}
 		}

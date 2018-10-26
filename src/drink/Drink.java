@@ -1,31 +1,30 @@
 package drink;
 import java.math.BigDecimal;
-import java.util.Map;
-import ingredient.Ingredient;
+import recipes.Recipe;
+import recipes.RecipeItem;
 
 public class Drink implements Comparable<Drink>{
 	private final String name;
-	private final Map<Ingredient, Integer> ingredientMap;
+	private final Recipe recipe;
 	private BigDecimal cost;
-	
-	public Drink(String name, Map<Ingredient, Integer> ingredientMap){
+	public Drink(String name, Recipe recipe){
 		if (name==null) {
 			throw new IllegalArgumentException("name can not be null during Drink construction.");
 		}
-		if (ingredientMap==null) {
-			throw new IllegalArgumentException("ingredientMap can not be null during Drink construction.");
+		if (recipe==null) {
+			throw new IllegalArgumentException("recipe can not be null during Drink construction.");
 		}
 		this.name=name;
-		this.ingredientMap=ingredientMap;
+		this.recipe=recipe;
 		initializeCost();
 	}
 	
 	
 	private void initializeCost() {
 		this.cost=new BigDecimal("0.00");
-		for (Map.Entry<Ingredient, Integer> entry: this.ingredientMap.entrySet()) {
-			for (int i=0;i<entry.getValue();i++) {
-				this.cost=this.cost.add(entry.getKey().getUnitCost());
+		for (RecipeItem entry: this.recipe.getRecipeItemList()) {
+			for (int i=0;i<entry.getUnits();i++) {
+				this.cost=this.cost.add(entry.getIngredient().getUnitCost());
 			}
 		}
 	}
@@ -38,8 +37,8 @@ public class Drink implements Comparable<Drink>{
 		return this.cost;
 	}
 	
-	public Map<Ingredient, Integer> getIngredients(){
-		return this.ingredientMap;
+	public Recipe getRecipe() {
+		return this.recipe;
 	}
 	
 

@@ -11,7 +11,6 @@ public class JavaMaticApplication {
 		Scanner s=new Scanner(System.in);
 		String input=s.nextLine();
 		while(!input.equals("q") && !input.equals("Q")){
-			
 			try {
 				if(input.isEmpty()) {
 					input=s.nextLine();
@@ -27,7 +26,6 @@ public class JavaMaticApplication {
 			machine.display();
 			input=s.nextLine();
 		}
-		
 		s.close();
 	}
 
