@@ -9,6 +9,12 @@ public class Drink implements Comparable<Drink>{
 	private BigDecimal cost;
 	
 	public Drink(String name, Map<Ingredient, Integer> ingredientMap){
+		if (name==null) {
+			throw new IllegalArgumentException("name can not be null during Drink construction.");
+		}
+		if (ingredientMap==null) {
+			throw new IllegalArgumentException("ingredientMap can not be null during Drink construction.");
+		}
 		this.name=name;
 		this.ingredientMap=ingredientMap;
 		initializeCost();
@@ -40,7 +46,7 @@ public class Drink implements Comparable<Drink>{
 	@Override
 	public int compareTo(Drink other) {
 		if (other==null) {
-			throw new NullPointerException("Comparing Drink " + this+" with a Null Pointer.");
+			throw new IllegalArgumentException("Can not compare a Drink object "+this+" with a null object");
 		}
 		return this.name.compareTo(other.name);
 	}
@@ -62,12 +68,12 @@ public class Drink implements Comparable<Drink>{
 		if (getClass() != obj.getClass())
 			return false;
 		Drink other = (Drink) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		if (!name.equals(other.name)) {
 			return false;
-		return true;
+		}else {
+			return true;
+		}
+		
 	}
 
 	@Override

@@ -1,4 +1,5 @@
 package ingredient;
+
 import java.math.BigDecimal;
 
 public class Ingredient implements Comparable<Ingredient>{
@@ -6,6 +7,12 @@ public class Ingredient implements Comparable<Ingredient>{
 	private final BigDecimal unitCost;
 
 	public Ingredient(String name, BigDecimal unitCost){
+		if (name==null) {
+			throw new IllegalArgumentException("name can not be null during Ingredient construction.");
+		}
+		if (unitCost==null) {
+			throw new IllegalArgumentException("unitCost can not be null during Ingredient construction.");
+		}
 		this.name=name;
 		this.unitCost=unitCost;
 	}
@@ -22,7 +29,7 @@ public class Ingredient implements Comparable<Ingredient>{
 	@Override
 	public int compareTo(Ingredient other){
 		if (other==null) {
-			throw new NullPointerException("Comparing Ingredient " + this+" with a Null Pointer.");
+			throw new IllegalArgumentException("Can not compare an Ingredient object "+this+" with a null object");
 		}
 		return this.name.compareTo(other.name);
 	}
@@ -44,12 +51,12 @@ public class Ingredient implements Comparable<Ingredient>{
 		if (getClass() != obj.getClass())
 			return false;
 		Ingredient other = (Ingredient) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		if (!name.equals(other.name)) {
 			return false;
-		return true;
+		}else {
+			return true;
+		}
+		
 	}
 
 	@Override

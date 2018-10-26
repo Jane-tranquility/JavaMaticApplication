@@ -9,7 +9,6 @@ import valueInitialization.DefaultDrinks;
 import valueInitialization.DefaultIngredients;
 
 
-
 public class JavaMaticMachine {
 	private final static int INGREDIENT_CAPACITY=10;
 	private final List<Drink> drinkList=DefaultDrinks.getDefaultDrinks();
@@ -49,16 +48,24 @@ public class JavaMaticMachine {
 	}
 	
 	public void makeDrink(int index) {
-		Drink drink=drinkList.get(index-1);
-		if (isDrinkOutOfStock(drink)) {
-			System.out.println("Out of stock:"+drink.getName());
+		if(index<1 || index>getMenuSize()) {
+			System.out.println("Invalid Selection:"+index);
 		}else {
-			System.out.println("Dispensing:"+drink.getName());
-			updateStock(drink);
+			Drink drink=drinkList.get(index-1);
+			if (isDrinkOutOfStock(drink)) {
+				System.out.println("Out of stock:"+drink.getName());
+			}else {
+				System.out.println("Dispensing:"+drink.getName());
+				updateStock(drink);
+			}
 		}
+		
 	}
 	
 	private void updateStock(Drink drink) {
+		if (drink==null) {
+			throw new NullPointerException("Drink object is null");
+		}
 		for (Map.Entry<Ingredient, Integer> recipe: drink.getIngredients().entrySet()) {
 			Ingredient in=recipe.getKey();
 			int stock=ingredientStock.get(in);
@@ -80,7 +87,7 @@ public class JavaMaticMachine {
 		return false;
 	}
 	
-	public int getMenuSize() {
+	private int getMenuSize() {
 		return drinkList.size();
 	}
 }

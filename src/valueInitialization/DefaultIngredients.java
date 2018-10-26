@@ -10,6 +10,7 @@ import ingredient.Ingredient;
 public final class DefaultIngredients {
 	private static final List<Ingredient> defaultIngredients=new ArrayList<Ingredient>();
 	static {
+		
 		defaultIngredients.add(new Ingredient("Cocoa", new BigDecimal("0.90")));
 		defaultIngredients.add(new Ingredient("Coffee", new BigDecimal("0.75")));
 		defaultIngredients.add(new Ingredient("Cream", new BigDecimal("0.25")));
@@ -27,7 +28,7 @@ public final class DefaultIngredients {
 	
 	private static boolean containsIngredientByName(String name) {
 		if (name==null) {
-			throw new NullPointerException("name is null");
+			throw new NullPointerException("name is null, can not be searchable in ingredient list");
 		}
 		List<String> temp=new ArrayList<String>();
 		for (Ingredient in: defaultIngredients) {
@@ -42,7 +43,7 @@ public final class DefaultIngredients {
 	
 	public static Ingredient searchIngredientByName(String name) throws NoMatchItemFoundException{
 		if (name==null) {
-			throw new NullPointerException("searchByName method searched by a null name");
+			throw new NullPointerException("searchByName method searched by a null name, which is illegal");
 		}
 		
 		if (!containsIngredientByName(name)) {
