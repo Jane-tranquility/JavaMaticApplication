@@ -2,7 +2,6 @@ package javaMaticMachine;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.List;
-import java.util.Map;
 
 import ingredient.Drink;
 import ingredient.Ingredient;
@@ -37,7 +36,7 @@ public class JavaMaticMachine {
 	
 	
 	public void reStock() {
-		for (Map.Entry<Ingredient, Integer> entry: ingredientStock.entrySet()) {
+		for (SortedMap.Entry<Ingredient, Integer> entry: ingredientStock.entrySet()) {
 			ingredientStock.put(entry.getKey(), INGREDIENT_CAPACITY);
 		}
 	}

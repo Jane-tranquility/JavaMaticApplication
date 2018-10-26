@@ -11,7 +11,6 @@ public class JavaMaticApplication {
 		MachineDisplay screen=new MachineDisplay(machine);
 		Transaction transaction=new Transaction(screen);
 		transaction.start();
-		
 	}
 
 }

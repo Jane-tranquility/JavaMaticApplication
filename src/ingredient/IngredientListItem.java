@@ -22,4 +22,5 @@ public class IngredientListItem {
 	public int getUnits() {
 		return this.units;
 	}
+	
 }
