@@ -5,6 +5,10 @@ import java.util.Map;
 import exceptions.DrinkOutOfStockException;
 import ingredient.Ingredient;
 
+
+/*
+ * 	MachineDisplay works like the screen to display information to the user
+ */
 public class MachineDisplay {
 	private JavaMaticMachine machine;
 	
@@ -26,6 +30,9 @@ public class MachineDisplay {
 		System.out.println();
 	}
 	
+	/*
+	 * to display the inventory of the machine has
+	 */
 	private void displayInventory() {
 		System.out.println("Inventory:");
 		for (Map.Entry<Ingredient, Integer> entry:machine.getStock().entrySet()) {
@@ -33,6 +40,10 @@ public class MachineDisplay {
 		}
 	}
 	
+	/*
+	 * to display names, and prices of each drink the machine can dispense
+	 * and display to the user whether a drink is available
+	 */
 	private void displayMenu() {
 		System.out.println("Menu:");
 		for (int i=0;i<machine.getDrinkMenu().size();i++) {
@@ -47,29 +58,5 @@ public class MachineDisplay {
 	public void pushToMakeDrink(int choice) throws DrinkOutOfStockException{
 		machine.makeDrink(choice);
 	}
-	
-	
-//	public void transactionStart() {
-//		display();
-//		Scanner s=new Scanner(System.in);
-//		String input=s.nextLine();
-//		while(!input.equals("q") && !input.equals("Q")){
-//			try {
-//				if(input.isEmpty()) {
-//					input=s.nextLine();
-//					continue;
-//				}else if (input.equals("r") || input.equals("R")){
-//					machine.reStock();
-//				}else {
-//					machine.makeDrink(Integer.parseInt(input));
-//				}
-//			}catch(NumberFormatException e) {
-//				System.out.println("Invalid Selection:"+input);
-//			}
-//			display();
-//			input=s.nextLine();
-//		}
-//		s.close();
-//	}
 	
 }

@@ -13,6 +13,12 @@ import valueInitialization.DefaultDrinks;
 import valueInitialization.DefaultIngredients;
 
 
+/*
+ * JavaMaticMachine class--deals with the main business logic of the coffee machine
+ * -reStock the ingredients
+ * -makeDrink if the choice is valid
+ * -check whether a drink is out of stock
+ */
 public class JavaMaticMachine {
 	private final static int INGREDIENT_CAPACITY=10;
 	private final List<Drink> drinkList=DefaultDrinks.getDefaultDrinks();
@@ -37,7 +43,10 @@ public class JavaMaticMachine {
 		return this.drinkList;
 	}
 	
-	
+	/*
+	 * reStock method:
+	 * to assign 10 units to each ingredient of the machine
+	 */
 	public void reStock() {
 		for (SortedMap.Entry<Ingredient, Integer> entry: ingredientStock.entrySet()) {
 			ingredientStock.put(entry.getKey(), INGREDIENT_CAPACITY);
@@ -48,6 +57,13 @@ public class JavaMaticMachine {
 		return drinkList.size();
 	}
 	
+	/*
+	 * make the drink if the index is valid:
+	 * -check index is in range of 1 to size of the menu
+	 * -if a number is valid, check whether a drink is out of stock
+	 *  	-if out of stock, throw the out of stock exception
+	 *      -if not out of stock, dispensing the drink and update the stock
+	 */
 	public void makeDrink(int index) throws DrinkOutOfStockException{
 		if(index<1 || index>getMenuSize()) {
 			throw new IllegalArgumentException("Invalid Selection:"+index);
@@ -63,6 +79,9 @@ public class JavaMaticMachine {
 		
 	}
 	
+	/*
+	 * Update the stock by stock of an ingredient - the units of the ingredient a drink needs
+	 */
 	private void updateStock(Drink drink) {
 		if (drink==null) {
 			throw new IllegalArgumentException("Drink object is null");
@@ -74,6 +93,12 @@ public class JavaMaticMachine {
 		}
 	}
 	
+	/*
+	 * to check whether s drink is out of stock by comparing number stock of an ingredient and drink recipe
+	 * if the stock >= recipe needs, not out of stock, return false
+	 * if  stock < recipe needs, return true
+	 * @return boolean
+	 */
 	public boolean isDrinkOutOfStock(Drink drink) {
 		if (drink==null) {
 			throw new IllegalArgumentException("Drink object is null");

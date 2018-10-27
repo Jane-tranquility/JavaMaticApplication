@@ -2,11 +2,17 @@ package ingredient;
 import java.math.BigDecimal;
 import java.util.List;
 
-
+/*
+ *  Drink class
+ *  name-- Drink's name
+ *  recipe-- a list of IngredientListItem objects where defines how many units of each ingredient needed in the drink
+ *  cost-- cost of the whole drink
+ */
 public class Drink implements Comparable<Drink>{
 	private final String name;
 	private final List<IngredientListItem> recipe;
 	private BigDecimal cost;
+	
 	public Drink(String name, List<IngredientListItem> recipe){
 		if (name==null) {
 			throw new IllegalArgumentException("name can not be null during Drink construction.");
@@ -23,9 +29,7 @@ public class Drink implements Comparable<Drink>{
 	private void initializeCost() {
 		this.cost=new BigDecimal("0.00");
 		for (IngredientListItem entry: this.recipe) {
-			for (int i=0;i<entry.getUnits();i++) {
-				this.cost=this.cost.add(entry.getIngredient().getUnitCost());
-			}
+			this.cost=this.cost.add(entry.getItemPrice());
 		}
 	}
 	
@@ -41,7 +45,9 @@ public class Drink implements Comparable<Drink>{
 		return this.recipe;
 	}
 	
-
+	/*
+	 * Compare by name
+	 */
 	@Override
 	public int compareTo(Drink other) {
 		if (other==null) {
@@ -58,6 +64,9 @@ public class Drink implements Comparable<Drink>{
 		return result;
 	}
 
+	/*
+	 * 	Two drinks are considered to be equal when their names are equal.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -74,7 +83,9 @@ public class Drink implements Comparable<Drink>{
 		}
 		
 	}
-
+	/*
+	 * String representation of the class is the name attribute + cost .
+	 */
 	@Override
 	public String toString() {
 		return name + ",$" + cost;

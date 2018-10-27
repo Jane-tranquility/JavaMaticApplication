@@ -54,5 +54,13 @@ class IngredientListItemTest {
 		int unit=ingredientListItem.getUnits();
 		Assertions.assertSame(2, unit);
 	}
+	
+	@Test
+	void testGetItemPrice() {
+		Ingredient ingredient=new Ingredient("Coffee", new BigDecimal("0.90"));
+		IngredientListItem ingredientListItem=new IngredientListItem(ingredient, 2);
+		
+		Assertions.assertEquals(new BigDecimal("1.80"), ingredientListItem.getItemPrice());
+	}
 
 }

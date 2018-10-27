@@ -7,6 +7,10 @@ import java.util.List;
 import exceptions.NoMatchItemFoundException;
 import ingredient.Ingredient;
 
+
+/*
+ * Initialization of the ingredient list
+ */
 public final class DefaultIngredients {
 	private static final List<Ingredient> defaultIngredients=new ArrayList<Ingredient>();
 	static {
@@ -26,6 +30,9 @@ public final class DefaultIngredients {
 		return defaultIngredients;
 	}
 	
+	/* To check whether an ingredient is in the initialization list by its name
+	 * @param name
+	 */
 	private static boolean containsIngredientByName(String name) {
 		if (name==null) {
 			throw new IllegalArgumentException("name is null, can not be searchable in ingredient list");
@@ -41,6 +48,10 @@ public final class DefaultIngredients {
 		}
 	}
 	
+	/* If a certain name is in the initialization list, return the Ingredient object
+	 * @param name
+	 * @return Ingredient
+	 */
 	public static Ingredient searchIngredientByName(String name) throws NoMatchItemFoundException{
 		if (name==null) {
 			throw new IllegalArgumentException("searchByName method searched by a null name, which is illegal");

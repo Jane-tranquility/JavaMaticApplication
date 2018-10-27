@@ -2,6 +2,11 @@ package ingredient;
 
 import java.math.BigDecimal;
 
+/*
+ * Ingredient class
+ *  name-- Ingredient's name
+ *  unitCost-- cost of one unit of the ingredient in BigDecimal representation
+ */
 public class Ingredient implements Comparable<Ingredient>{
 	private final String name;
 	private final BigDecimal unitCost;
@@ -25,7 +30,9 @@ public class Ingredient implements Comparable<Ingredient>{
 		return this.unitCost;
 	}
 	
-
+	/*
+	 * Compare by name
+	 */
 	@Override
 	public int compareTo(Ingredient other){
 		if (other==null) {
@@ -41,7 +48,9 @@ public class Ingredient implements Comparable<Ingredient>{
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
-
+	/*
+	 * 	Two ingredients are considered to be equal when their names are equal.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -59,6 +68,9 @@ public class Ingredient implements Comparable<Ingredient>{
 		
 	}
 
+	/*
+	 * String representation of the class is the name attribute.
+	 */
 	@Override
 	public String toString(){
 		return this.name;

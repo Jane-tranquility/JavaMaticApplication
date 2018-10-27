@@ -1,5 +1,9 @@
 package ingredient;
+import java.math.BigDecimal;
 
+/*
+ *  IngredientListItem class--a pair of Ingredient and units needed for a drink
+ */
 public class IngredientListItem {
 	private final Ingredient ingredient;
 	private int units;
@@ -23,4 +27,11 @@ public class IngredientListItem {
 		return this.units;
 	}
 	
+	/*
+	 * return the price for each ingredient in a drink
+	 * by unit price* units
+	 */
+	public BigDecimal getItemPrice() {
+		return ingredient.getUnitCost().multiply(new BigDecimal(units));
+	}
 }

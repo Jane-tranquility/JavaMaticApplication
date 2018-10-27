@@ -9,7 +9,9 @@ import exceptions.NoMatchItemFoundException;
 import ingredient.Drink;
 import ingredient.IngredientListItem;
 
-
+/*
+ * Initialization of the drink list
+ */
 public class DefaultDrinks {
 	private static final List<Drink> defaultDrinks=new ArrayList<Drink>();
 	static{
