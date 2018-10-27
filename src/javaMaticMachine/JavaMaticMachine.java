@@ -1,6 +1,9 @@
 package javaMaticMachine;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
+import exceptions.DrinkOutOfStockException;
+
 import java.util.List;
 
 import ingredient.Drink;
@@ -45,13 +48,13 @@ public class JavaMaticMachine {
 		return drinkList.size();
 	}
 	
-	public void makeDrink(int index) {
+	public void makeDrink(int index) throws DrinkOutOfStockException{
 		if(index<1 || index>getMenuSize()) {
-			System.out.println("Invalid Selection:"+index);
+			throw new IllegalArgumentException("Invalid Selection:"+index);
 		}else {
 			Drink drink=drinkList.get(index-1);
 			if (isDrinkOutOfStock(drink)) {
-				System.out.println("Out of stock:"+drink.getName());
+				throw new DrinkOutOfStockException("Out of stock:"+drink.getName());
 			}else {
 				System.out.println("Dispensing:"+drink.getName());
 				updateStock(drink);
@@ -62,7 +65,7 @@ public class JavaMaticMachine {
 	
 	private void updateStock(Drink drink) {
 		if (drink==null) {
-			throw new NullPointerException("Drink object is null");
+			throw new IllegalArgumentException("Drink object is null");
 		}
 		for (IngredientListItem recipe: drink.getRecipe()) {
 			Ingredient in=recipe.getIngredient();
@@ -73,7 +76,7 @@ public class JavaMaticMachine {
 	
 	public boolean isDrinkOutOfStock(Drink drink) {
 		if (drink==null) {
-			throw new NullPointerException("Drink object is null");
+			throw new IllegalArgumentException("Drink object is null");
 		}
 		for (IngredientListItem recipe: drink.getRecipe()) {
 			Ingredient in=recipe.getIngredient();

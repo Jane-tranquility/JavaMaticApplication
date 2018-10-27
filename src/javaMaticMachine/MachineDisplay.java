@@ -2,6 +2,7 @@ package javaMaticMachine;
 
 import java.util.Map;
 
+import exceptions.DrinkOutOfStockException;
 import ingredient.Ingredient;
 
 public class MachineDisplay {
@@ -38,6 +39,15 @@ public class MachineDisplay {
 			System.out.println((i+1)+","+machine.getDrinkMenu().get(i)+","+!machine.isDrinkOutOfStock(machine.getDrinkMenu().get(i)));
 		}
 	}
+	
+	public void pushToReStock() {
+		machine.reStock();
+	}
+	
+	public void pushToMakeDrink(int choice) throws DrinkOutOfStockException{
+		machine.makeDrink(choice);
+	}
+	
 	
 //	public void transactionStart() {
 //		display();
